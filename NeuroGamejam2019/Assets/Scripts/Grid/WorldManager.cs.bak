@@ -1,0 +1,128 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+public class WorldManager : MonoBehaviour
+{
+
+    public float planetHealth;
+    public float deltaChange = 0;
+    public Transform gameOverPanel;
+    public Logger log;
+
+    private ProceduralGrid grid;
+    private PlayerController player;
+    private List<HexagonInfo> hexagonsinfo;
+    internal float maxHealth;
+
+    public void Start()
+    {
+        player = FindObjectOfType<PlayerController>();
+        grid = GetComponent<ProceduralGrid>();
+        hexagonsinfo = new List<HexagonInfo>();
+        CalculateMaxHealth();
+        GenerateResources();
+
+    }
+
+    public void CalculateMaxHealth()
+    {
+        float count = 0;
+        foreach (Transform t in grid.hexagons)
+        {
+            hexagonsinfo.Add(t.GetComponent<HexagonInfo>());
+            count += t.GetComponent<HexagonInfo>().maxR1;
+        }
+        maxHealth = count;
+        planetHealth = 100;
+    }
+
+    public void GenerateResources()
+    {
+        foreach(HexagonInfo h in hexagonsinfo)
+        {
+            h.SpawnResources();
+        }
+    }
+
+    public void RespawnResources()
+    {
+        foreach (HexagonInfo h in hexagonsinfo)
+        {
+            h.RespawnResource();
+        }
+    }
+    private void Update()
+    {
+        if(gameOverPanel.gameObject.activeSelf && Input.GetMouseButton(0) || Input.GetMouseButton(1))
+        {
+            grid.ClearLevel();
+            if (grid.cleared)
+            {
+                grid.GenerateGrid();
+                grid.Awake();
+                grid.Start();
+                Start();
+                player.Start();
+            }
+            gameOverPanel.gameObject.SetActive(false);
+
+           //  SceneManager.LoadScene(0);
+        }
+
+    }
+
+    public void CalculateHealth()
+    {
+        planetHealth = planetHealth + deltaChange;
+        
+        if(planetHealth <= 0)
+        {
+            GameOver(true);
+        }
+        if (player.playerHealth <= 0)
+        {
+            GameOver(false);
+        }
+
+    }
+
+    public void ExploitGrid()
+    {
+        deltaChange += -1;
+    }
+    public void InvestGrid()
+    {
+        deltaChange += 0.5f;
+    }
+
+    public void GameOver(bool planetDeath)
+    {
+
+     //   transform.gameObject.SetActive(false);
+      //  player.gameObject.SetActive(false);
+
+        if (planetDeath)
+        {
+            Text txt = gameOverPanel.GetChild(0).GetComponent<Text>();
+            txt.text += "\nThe planet is dead\nIt´s your fault...";
+        }
+        else if(player.playerHealth <= 0)
+        {
+            Text txt = gameOverPanel.GetChild(0).GetComponent<Text>();
+            txt.text += "\nYou died.";
+        }
+
+        gameOverPanel.gameObject.SetActive(true);
+
+
+
+        //TODO restart game (regenerate?)
+
+        log.CloseLog();
+
+    }
+
+}

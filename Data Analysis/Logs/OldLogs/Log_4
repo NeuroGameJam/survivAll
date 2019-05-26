@@ -1,0 +1,18 @@
+2019_05_26T05_20_52Z ; PLAYER_NAME
+Play_number Play_Type Player_Wealth World_Health World_Delta Current_Tile
+1 E 60 99 -1 13
+2 E 70 97 -2 13
+2 M 65 95 -2 18
+3 E 75 92 -3 18
+4 E 85 88 -4 18
+4 M 80 84 -4 14
+5 E 90 79 -5 14
+6 E 100 73 -6 14
+7 E 100 66 -7 14
+7 M 95 59 -7 8
+7 M 90 52 -7 3
+8 E 100 44 -8 3
+9 E 100 35 -9 3
+10 E 100 25 -10 3
+11 E 100 14 -11 3
+12 E 100 2 -12 3

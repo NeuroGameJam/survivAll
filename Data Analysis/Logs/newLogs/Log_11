@@ -1,0 +1,9 @@
+2019_05_26;16_56_17 ; PLAYER_NAME;961
+Play_number Play_Type Player_Wealth World_Health World_Delta Current_Tile
+1 M 45 100 0 208
+2 I 40 100,5 0,5 208
+3 I 35 101,5 1 208
+4 M 25 102,5 1 207
+5 I 20 104 1,5 207
+6 M 10 105,5 1,5 206
+7 M 5 107 1,5 236
