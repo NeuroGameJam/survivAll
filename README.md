@@ -10,7 +10,7 @@ Credits:
 
 ---
 
-This game was made during the Neuro Game Jam 2018's edition and release under the MIT License.
+This game was made during the Neuro Game Jam 2019's edition and release under the MIT License.
 
 For selection criteria check CRITERIA.md
 
