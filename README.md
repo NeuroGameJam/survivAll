@@ -3,7 +3,7 @@
 Credits:
 
 - Diogo Dias
-- João Araújo
+- John Elliott
 - José Teixeira
 - Victòria Brugada 
 - Vitor Lobo
